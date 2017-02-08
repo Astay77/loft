@@ -6,7 +6,7 @@
  Функция должна принимать один аргумент и возвращать его
  */
 function returnFirstArgument(arg) {
-
+		return arg;
 }
 
 /*
@@ -15,8 +15,8 @@ function returnFirstArgument(arg) {
  Функция должна принимать два аргумента и возвращать сумму переданных значений
  Значение по умолчанию второго аргумента должно быть 100
  */
-function defaultParameterValue(a, b) {
-
+function defaultParameterValue(a, b = 100) {
+		return a + b;
 }
 
 /*
@@ -26,8 +26,12 @@ function defaultParameterValue(a, b) {
  Количество переданных аргументов заранее неизвестно
  */
 function returnArgumentsArray() {
-
-}
+	  var args = [];
+	  for (var i = 0; i < arguments.length; i++) {
+	  	args.push(arguments[i]);
+      }
+ 	return args;
+ }
 
 /*
  Задание 4:
@@ -35,7 +39,7 @@ function returnArgumentsArray() {
  Функция должна принимать другую функцию и возвращать результат вызова переданной функции
  */
 function returnFnResult(fn) {
-
+	return fn();
 }
 
 /*
@@ -45,9 +49,11 @@ function returnFnResult(fn) {
  При вызове F, переданное число должно быть увеличено на единицу и возвращено из F
  */
 function returnCounter(number) {
-
+	var number = 0;
+	return freturnCounter(number) {
+	return number++;}
 }
-
+	var newF = returnCounter(number);
 /*
  Задание 6 *:
 
@@ -55,7 +61,8 @@ function returnCounter(number) {
  Функция должна привязать переданные аргументы к функции F и вернуть получившуюся функцию
  */
 function bindFunction(fn) {
-
+	fn.bind(thisArg[fn]);
+	return fn(thisArg[fn]);
 }
 
 export {
