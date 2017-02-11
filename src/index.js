@@ -10,8 +10,17 @@
  Зарпещено использовать встроенные методы для работы с массивами
  */
 function isAllTrue(array, fn) {
-	
-
+	var array = [i];
+	for (i = 0; i < array.length; i++) {
+		if (i = true) {
+		return true;}
+		else {
+		return false;}
+		}
+	if (Array.isArray(array) !== array[i] || array.length == 0) {
+	console.log("empty array");}
+	if (fn !== 'function') {
+	console.log("fn is not a function");}
 }
 
 /*
