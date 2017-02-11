@@ -48,12 +48,14 @@ function returnFnResult(fn) {
  Функция должна принимать число (значение по умолчанию - 0) и возвращать функцию (F)
  При вызове F, переданное число должно быть увеличено на единицу и возвращено из F
  */
-function returnCounter(number) {
-	var number = 0;
-	return freturnCounter(number) {
-	return number++;}
+function returnCounter(number = 0) {
+	function F(number) {
+		return F(number);
+		}
+		F(number + 1);
+		return number + 1;
 }
-	var newF = returnCounter(number);
+	
 /*
  Задание 6 *:
 
@@ -61,8 +63,8 @@ function returnCounter(number) {
  Функция должна привязать переданные аргументы к функции F и вернуть получившуюся функцию
  */
 function bindFunction(fn) {
-	fn.bind(thisArg[fn]);
-	return fn(thisArg[fn]);
+
+	
 }
 
 export {
