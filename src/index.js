@@ -10,17 +10,16 @@
  Зарпещено использовать встроенные методы для работы с массивами
  */
 function isAllTrue(array, fn) {
-	var array = [i];
-	for (i = 0; i < array.length; i++) {
-		if (i = true) {
-		return true;}
-		else {
-		return false;}
-		}
-	if (Array.isArray(array) !== array[i] || array.length == 0) {
-	console.log("empty array");}
-	if (fn !== 'function') {
-	console.log("fn is not a function");}
+	var c = true;
+    for (var i = 0; i < array.length; i++) {
+    if (!fn(array[i])) {
+    c = false;}
+    }
+    if (typeof array !== 'object' || array.length == 0) {
+   throw new Error("empty array");}
+    else if (typeof fn !== 'function') {
+    throw new Error("fn is not a function");}
+    return c;
 }
 
 /*
@@ -33,6 +32,16 @@ function isAllTrue(array, fn) {
  Зарпещено использовать встроенные методы для работы с массивами
  */
 function isSomeTrue(array, fn) {
+		var a = false;
+		for (var i = 0; i < array.length; i++) {
+		if (!fn(array[i])) {
+		a = true;}
+		}
+		if (typeof array !== 'object' || array.length == 0) {
+	    throw new Error("empty array");}
+		else if (typeof fn !== 'function') {
+		throw new Error("fn is not a function");}
+		return a;
 }
 
 /*
