@@ -53,8 +53,8 @@ function isSomeTrue(array, fn) {
  - fn не является функцией (с текстом "fn is not a function")
  */
 function returnBadArguments(fn) {
-		
-		
+	  
+
 }
 
 /*
@@ -88,7 +88,10 @@ function findError(data1, data2) {
  - number не является числом (с текстом "number is not a number")
  - какой-либо из аргументов div является нулем (с текстом "division by 0")
  */
-function calculator(number) {
+function calculator(number = 0) {
+	 	
+
+	 	
 }
 
 export {
