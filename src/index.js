@@ -56,8 +56,8 @@ function returnBadArguments(fn) {
 	   var args = [];
 	   for (var i = 1; i < arguments.length; i++) {
 	   if (typeof i !== 'function') {
-	   throw new Error("fn is not a function");
 	   return args.push(arguments[i]);}
+	   throw new Error("fn is not a function");
 	   }
 	   if (args.length === 0) {
 	   return [];}
