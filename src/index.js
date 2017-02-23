@@ -52,15 +52,9 @@ function isSomeTrue(array, fn) {
  Необходимо выбрасывать исключение в случаях:
  - fn не является функцией (с текстом "fn is not a function")
  */
+        
 function returnBadArguments(fn) {
-	   var args = [];
-	   for (var i = 1; i < arguments.length; i++) {
-	   if (typeof i !== 'function') {
-	   return args.push(arguments[i]);}
-	   throw new Error("fn is not a function");
-	   }
-	   if (args.length === 0) {
-	   return [];}
+
 }
 
 /*
@@ -71,11 +65,10 @@ function returnBadArguments(fn) {
 function findError(data1, data2) {
     return (function() {
         for (var i = 0; i < data1.length; i++) {
-            if (data1[i] !== data2[i]) {
+            if (data1.length[i] !== data2.length[i]) {
                 return false;
             }
         }
-
         return true;
     })();
 }
@@ -95,9 +88,7 @@ function findError(data1, data2) {
  - какой-либо из аргументов div является нулем (с текстом "division by 0")
  */
 function calculator(number = 0) {
-	 	
 
-	 	
 }
 
 export {
