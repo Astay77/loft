@@ -10,7 +10,7 @@
  Зарпещено использовать встроенные методы для работы с массивами
  */
 function isAllTrue(array, fn) {
-	var c = true;
+    var c = true;
     for (var i = 0; i < array.length; i++) {
     if (!fn(array[i])) {
     c = false;}
@@ -32,16 +32,16 @@ function isAllTrue(array, fn) {
  Зарпещено использовать встроенные методы для работы с массивами
  */
 function isSomeTrue(array, fn) {
-		var a = false;
-		for (var i = 0; i < array.length; i++) {
-		if (!fn(array[i])) {
-		a = true;}
-		}
-		if (typeof array !== 'object' || array.length == 0) {
-	    throw new Error("empty array");}
-		else if (typeof fn !== 'function') {
-		throw new Error("fn is not a function");}
-		return a;
+    var a = false;
+        for (var i = 0; i < array.length; i++) {
+            if (!fn(array[i])) {
+        a = true;}
+        }
+        if (typeof array !== 'object' || array.length == 0) {
+            throw new Error("empty array");}
+        else if (typeof fn !== 'function') {
+            throw new Error("fn is not a function");}
+        return a;
 }
 
 /*
@@ -52,17 +52,16 @@ function isSomeTrue(array, fn) {
  Необходимо выбрасывать исключение в случаях:
  - fn не является функцией (с текстом "fn is not a function")
  */
-        
 function returnBadArguments(fn) {
-   var array = [];
-    if (typeof fn !== 'function') {
-        throw new Error('fn is not a function');
-    }
-    for (var i = 1; i < arguments.length; i++) {
-        try {
-            fn(arguments[i]);
-        } catch (e) {
-            array.push(arguments[i]);
+            var array = [];
+            if (typeof fn !== 'function') {
+                throw new Error('fn is not a function');
+            }
+             for (var i = 1; i < arguments.length; i++) {
+                try {
+                     fn(arguments[i]);
+                    } catch (e) {
+                        array.push(arguments[i]);
         }
     }
     return array;
@@ -80,6 +79,7 @@ function findError(data1, data2) {
                 return false;
             }
         }
+
         return true;
     })();
 }
@@ -99,37 +99,39 @@ function findError(data1, data2) {
  - какой-либо из аргументов div является нулем (с текстом "division by 0")
  */
 function calculator(number = 0) {
-        var obj = {
-        sum: function() {
-        var result;
-        for (var i = 0; i < arguments.length; i++) {
-        result = number + arguments[i]; }
-        return(result); },
-        dif: function() {
-        var result1;
-        for (var i = 0; i < arguments.length; i++) {
-        result1 = number - arguments[i]; }
-        return(result1); },
-        div: function() {
-        var result2;
-        for (var i = 1; i < arguments.length; i++) {
-        result2 = number / arguments[i];
-        if (arguments[i] === 0) {
-            throw new Error ("division by 0");}
-        }
-        return(result2); 
-        },
-        mul: function() {
-        var result3;
-        for (var i = 1; i < arguments.length; i++) {
-        result3 = number * arguments[i]; }
-        return(result3); }
-        }
-        return obj; 
-        if (typeof(number) !== number) {
+            var obj = {
+            sum: function() {
+            var result;
+            for (var i = 0; i < arguments.length; i++) {
+                result = number + arguments[i]; }
+                return(result); },
+
+            dif: function() {
+            var result1;
+            for (var i = 0; i < arguments.length; i++) {
+                result1 = number - arguments[i]; }
+                return(result1); },
+
+            div: function() {
+            var result2;
+            for (var i = 1; i < arguments.length; i++) {
+                result2 = number / arguments[i];
+            if (arguments[i] === 0) {
+                throw new Error ("division by 0");}
+            }
+                return(result2); 
+            },
+
+            mul: function() {
+            var result3;
+            for (var i = 1; i < arguments.length; i++) {
+                result3 = number * arguments[i]; }
+                return(result3); }
+            }
+            return obj; 
+            if (typeof(number) !== number) {
                throw new Error ("number is not a number");}
 }
-
 
 export {
     isAllTrue,
@@ -138,6 +140,3 @@ export {
     findError,
     calculator
 };
-=======
-
-
