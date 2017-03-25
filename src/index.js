@@ -19,7 +19,7 @@ function createDivWithText(text) {
  * @return {Element}
  */
 function createAWithHref(hrefValue) {
-    var newEl = document.createElement('A');
+    var newEl = document.createElement('a');
     newEl.setAttribute('href', hrefValue);
     return newEl;
 }
