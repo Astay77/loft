@@ -19,6 +19,7 @@ function addListener(eventName, target, fn) {
  * @param {function} fn - обработчик
  */
 function removeListener(eventName, target, fn) {
+	target.removeEventListener(eventName, fn);
 }
 
 /**
@@ -28,7 +29,10 @@ function removeListener(eventName, target, fn) {
  * @param {Element} target - элемент, на который нужно добавить обработчик
  */
 function skipDefault(eventName, target) {
-    target.addEventListener(eventName, e => e.preventDefault());
+    //target.addEventListener(eventName, e => e.preventDefault());
+    target.addEventListener(eventName, function(e) {
+    	e.preventDefault();
+    })
 }
 
 /**
@@ -37,6 +41,8 @@ function skipDefault(eventName, target) {
  * @param {Element} target - элемент, на который нужно добавить обработчик
  */
 function emulateClick(target) {
+	var newEvent = new Event('click');
+	target.dispatchEvent(newEvent);
 }
 
 /**
@@ -47,6 +53,12 @@ function emulateClick(target) {
  * @param {function} fn - функция, которую нужно вызвать при клике на элемент BUTTON внутри target
  */
 function delegate(target, fn) {
+	var handler = function(e) {
+		if (e.target.nodeName == 'BUTTON') {
+			fn();
+		}
+	}
+	target.addEventListener('click', handler);
 }
 
 /**
@@ -59,6 +71,11 @@ function delegate(target, fn) {
  * @param {function} fn - обработчик
  */
 function once(target, fn) {
+	var handler = function(e) {
+		fn();
+		target.removeEventListener('click', handler);
+	}
+	target.addEventListener('click', handler);
 }
 
 export {
