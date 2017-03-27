@@ -42,7 +42,7 @@ function loadAndSortTowns() {
  
                  return compare(a, b, ++i);
              }
-             resolve(gotArr.sort(compare));
+             resolve(newArr.sort(compare));
          })
  
          xhr.addEventListener('error', function() {
