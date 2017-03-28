@@ -13,9 +13,12 @@ loaders.push({
 });
 
 module.exports = {
-    entry: './src/index.js',
+    entry: {
+        main: './src/index.js',
+        dnd: './src/dnd.js'
+    },
     output: {
-        filename: '[hash].js',
+        filename: '[chunkhash].js',
         path: './dist'
     },
     devtool: 'source-map',
@@ -24,15 +27,22 @@ module.exports = {
     },
     plugins: [
         new webpack.optimize.UglifyJsPlugin({
-        sourceMap: true,
-        compress: {
-        drop_debugger: false
-        }
+            sourceMap: true,
+            compress: {
+                drop_debugger: false
+            }
         }),
         new ExtractTextPlugin('styles.css'),
         new HtmlPlugin({
-            title: 'Loft School sample project',
-            template: 'index.hbs'
+            title: 'Main Homework',
+            template: 'index.hbs',
+            chunks: ['main']
+        }),
+        new HtmlPlugin({
+            title: 'Div Drag And Drop',
+            template: 'dnd.hbs',
+            filename: 'dnd.html',
+            chunks: ['dnd']
         }),
         new CleanWebpackPlugin(['dist'])
     ]
