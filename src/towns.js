@@ -38,6 +38,37 @@ let homeworkContainer = document.querySelector('#homework-container');
 function loadTowns() {
     return require('./index').loadAndSortTowns();
 }
+homeworkContainer.querySelector('#filter-input').style.display = 'none';
+loadTowns()
+.then(function(a) {
+	let loadingBlock = homeworkContainer.querySelector('#loading-block');
+	let filterInput = homeworkContainer.querySelector('#filter-input');
+	let filterResult = homeworkContainer.querySelector('#filter-result');
+	
+	filterInput.addEventListener('keyup', function() {
+		let value = this.value.trim();
+		filterResult.innerHTML = '';
+		if (value == '') {
+			filterResult.innerHTML = '';
+		} else {
+			var insideFilterResults = '';
+			for (var i = 0; i < a.length; i++) {
+				if (isMatching(a[i].name.trim(), value)) {
+					insideFilterResults += '<div>' + a[i].name + '</div>';
+				}
+			}
+			filterResult.innerHTML = insideFilterResults;
+		}
+	});
+
+	filterResult.addEventListener('click', function(e) {
+		filterInput.value = e.target.innerHTML;
+		filterResult.innerHTML = null;
+	})
+},
+function(error) {
+	console.log(error)
+})
 
 /**
  * Функция должна проверять встречается ли подстрока chunk в строке full
@@ -53,6 +84,15 @@ function loadTowns() {
  * @return {boolean}
  */
 function isMatching(full, chunk) {
+	if (chunk == null) {
+		chunk = '';
+	}
+	var fulls = full.toLowerCase();
+	var chunks = chunk.toLowerCase();
+	if (fulls.indexOf(chunks) < 0) {
+		return false;
+	}
+	return true;
 }
 
 let loadingBlock = homeworkContainer.querySelector('#loading-block');

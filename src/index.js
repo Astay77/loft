@@ -7,13 +7,11 @@
  * @return {Promise}
  */
 function delayPromise(seconds) {
-    var pr = new Promise(
-        function(resolve) {
+    return new Promise(function(resolve) {
             setTimeout(function() {
                 return resolve();
                 }, 1000);
             });
-    return pr;
 }
 
 /**
@@ -33,23 +31,19 @@ function loadAndSortTowns() {
      
             function compare(a, b, i) {
                  i = i || 0;
- 
-                if (a.name.charAt(i) < b.name.charAt(i)) {
+                 if (a.name.charAt(i) < b.name.charAt(i)) {
                      return -1;
                  } else if (a.name.charAt(i) > b.name.charAt(i)) {
                      return 1;
                  }
- 
-                 return compare(a, b, ++i);
+                  return compare(a, b, ++i);
              }
              resolve(newArr.sort(compare));
          })
- 
-         xhr.addEventListener('error', function() {
+          xhr.addEventListener('error', function() {
              reject(error)
          })
- 
-         xhr.send();
+          xhr.send();
      })
  }
 
