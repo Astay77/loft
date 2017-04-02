@@ -13,9 +13,12 @@ loaders.push({
 });
 
 module.exports = {
-    entry: './src/index.js',
+    entry: {
+        main: './src/index.js',
+        cookie: './src/cookie.js'
+    },
     output: {
-        filename: '[hash].js',
+        filename: '[chunkhash].js',
         path: './dist'
     },
     devtool: 'source-map',
@@ -24,15 +27,22 @@ module.exports = {
     },
     plugins: [
         new webpack.optimize.UglifyJsPlugin({
-        sourceMap: true,
-        compress: {
-        drop_debugger: false
-        }
+            sourceMap: true,
+            compress: {
+                drop_debugger: false
+            }
         }),
         new ExtractTextPlugin('styles.css'),
         new HtmlPlugin({
-            title: 'Loft School sample project',
-            template: 'index.hbs'
+            title: 'Main Homework',
+            template: 'index.hbs',
+            chunks: ['main']
+        }),
+        new HtmlPlugin({
+            title: 'Cookie editor',
+            template: 'cookie.hbs',
+            filename: 'cookie.html',
+            chunks: ['cookie']
         }),
         new CleanWebpackPlugin(['dist'])
     ]
