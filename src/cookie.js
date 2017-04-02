@@ -53,6 +53,18 @@ let listTable = homeworkContainer.querySelector('#list-table tbody');
  * @return {boolean}
  */
 function isMatching(full, chunk) {
+	if (chunk == nul) {
+		chunk = '';
+	}
+	if (full == null) {
+		full = '';
+	}
+	var fulls = full.toLowerCase();
+	var chunks = chunk.toLowerCase();
+	if (fulls.indexOf(chunks) > -1) {
+		return true;
+	}
+	return false;
 }
 
 /**
@@ -61,12 +73,123 @@ function isMatching(full, chunk) {
  * @param name - имя cookie
  * @param value - значение cookie
  */
+
+addButton.addEventListener('click', createCookieTr);
 function createCookieTr(name, value) {
+    name = addNameInput.value;
+    value = addValueInput.value;
+    var filter = filterNameInput.value;
+    var cokasNames = document.querySelectorAll('.cookie_name');
+
+    if (filter.length > 0) {
+        if (isMatching(value, filter) == false) {
+            for (var prop in cokasNames) {
+                if (isMatching(cokasNames[prop].innerHTML, name) && !isMatching(cokasNames[prop].nextElementSibling.innerHTML, value)) {
+                    var thisTr = cokasNames[prop].parentNode;
+
+                    listTable.removeChild(thisTr);
+                    cokasNames[prop].parentNode.style.backgroundColor = 'red';
+                    document.cookie = name + '=' + value;
+                    return;
+                }
+            }
+        }
+        if (isMatching(name, filter) || isMatching(value, filter)) {
+            listTable.appendChild(createTr(name, value));
+            document.cookie = name + '=' + value;
+            return;
+        } 
+        if (!isMatching(name, filter)) {
+            document.cookie = name + '=' + value;
+            return;
+        }
+    }
+    if (document.querySelectorAll('.cookie_name').length == 0) {
+        listTable.appendChild(createTr(name, value));
+        document.cookie = name + '=' + value;
+        return;
+    }
+    if (document.querySelectorAll('.cookie_name').length > 0) {
+        for (var key in document.querySelectorAll('.cookie_name')) {    
+            if (document.querySelectorAll('.cookie_name')[key].innerHTML != name) {
+                continue;
+            } else if (document.querySelectorAll('.cookie_name')[key].innerHTML == name) {
+                document.querySelectorAll('.cookie_name')[key].nextElementSibling.innerHTML = value;
+                document.cookie = name + '=' + value;
+
+                return;
+            }
+        }
+    } 
+    listTable.appendChild(createTr(name, value));
+    document.cookie = name + '=' + value;
+}
+
+
+function createTr(name, value) {
+    var Str = document.createElement('tr');
+
+    var tdOne = document.createElement('td');
+    tdOne.setAttribute('class', 'cookie_name');
+    
+    var tdTwo = document.createElement('td');
+    tdTwo.setAttribute('class', 'cookie_value');
+
+    var tdThree = document.createElement('td');
+    tdThree.setAttribute('class', 'deleteCookies');
+  
+    tdOne.innerHTML = name;
+    tdTwo.innerHTML = value;
+ 
+    var button = document.createElement('button');
+
+    button.innerHTML = 'удалить';
+    button.classList.add('deleteCookies');
+  
+    tdThree.appendChild(button);
+    Str.appendChild(tdOne);
+    Str.appendChild(tdTwo);
+    Str.appendChild(tdThree);
+
+    return Str;
+}
+
+homeworkContainer.addEventListener('click', deleteTableRow);
+
+function deleteTableRow(e) {
+    if (e.target.classList.contains('deleteCookies')) {
+        listTable.removeChild(e.target.parentNode.parentNode);
+        var cookieNameToDelete = e.target.parentNode.parentNode.children[0].innerHTML;
+        var cookieValueToDelete = e.target.parentNode.parentNode.children[1].innerHTML;
+        document.cookie = cookieNameToDelete + '=' + cookieValueToDelete + ';expires=' + new Date(0);
+    } 
 }
 
 filterNameInput.addEventListener('keyup', function() {
+    makeTable();
 });
+
+function makeTable() {
+    var x = document.cookie.split('=').join().split(';').join().split(',');
+    var filterInputValue = filterNameInput.value;
+    listTable.innerHTML = '';
+    if (!filterInputValue) {
+        for (var z = 0; z < x.length; ) {
+            var p = z + 1;
+            listTable.appendChild(createTr(x[z], x[p]));
+            z = z + 2
+        }
+        return;
+    }
+    for (var i = 0; i < x.length; ) {
+        var k = i + 1;
+        if (isMatching(x[i], filterInputValue) || isMatching(x[k], filterInputValue) ) {
+            listTable.appendChild(createTr(x[i], x[k]));
+        }
+        i = i + 2;
+    }
+}
+makeTable();
 
 addButton.addEventListener('click', () => {
 });
-
