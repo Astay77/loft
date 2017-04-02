@@ -53,7 +53,7 @@ let listTable = homeworkContainer.querySelector('#list-table tbody');
  * @return {boolean}
  */
 function isMatching(full, chunk) {
-	if (chunk == nul) {
+	if (chunk == null) {
 		chunk = '';
 	}
 	if (full == null) {
